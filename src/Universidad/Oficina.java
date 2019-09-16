@@ -50,5 +50,19 @@ class MetodosOficina {
         return ofi.size();
     }
     
+    public int GenerarIdOficina(){
+        return Aleatorio(10000,99999);
+    }    
+    public ArrayList<Oficina> GenerarOficina(int cant){
+        ArrayList<Oficina> x = new ArrayList<>();
+        MetodosTrabajador t = new MetodosTrabajador();
+        for(int i=0 ; i<cant ; i++){
+            x.add(new Oficina(GenerarIdOficina(), t.GenerarTrabajador(Aleatorio(1, 3))));
+        }
+        return x;
+    }
     
+    public int Aleatorio(int min, int max){
+        return (int)((max - min + 1) * Math.random() + min);
+    }
 }

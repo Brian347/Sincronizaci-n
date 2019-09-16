@@ -51,6 +51,9 @@ public class Facultad {
 class MetodosFacultad{
     private ArrayList<Facultad> facu;
     
+    public MetodosFacultad(){
+        facu = new ArrayList<>();
+    }
    //--------Metodo basicos------------//
     public void Agregar(Facultad x){
         facu.add(x);
@@ -65,28 +68,33 @@ class MetodosFacultad{
         return facu.size();
     }
     
-    public String GenerarFacultad(){
-        String[] facultad = {"Ingenieria en Informatica y Sistemas",
+    public String GenerarNombreFacultad(){
+        String[] nombre = {"Ingenieria en Informatica y Sistemas",
             "Ingenieria Ambiental",
             "Ingenieria Forestal",
             "Ingenieria Zootecnia",
             "Economia",
             "Contabilidad",
             "Administracion"};
-        if(facu.get(0) == null){
-            return facultad[Aleatorio(0, facultad.length-1)];
-        }else{
-            for(int i=0 ; i<Tamaño() ; i++){
-                String nombreFacu = facultad[Aleatorio(0, facultad.length-1)];
-                if(facu.get(i).getNombre() != nombreFacu){
-                    return nombreFacu;
-                }
-            }
-        }
-        return "";
+        
+        return nombre[Aleatorio(0, nombre.length-1)];
+        
     }
+    
+    public ArrayList<Facultad> GenerarFacultad(int cant){
+        ArrayList<Facultad> x = new ArrayList<>();
+        MetodosDocente d = new MetodosDocente();
+         MetodosOficina o = new MetodosOficina();
+        MetodosSalon s = new MetodosSalon();
+        for(int i=0 ; i<cant ; i++){
+            x.add(new Facultad(GenerarNombreFacultad(), d.GenerarDocente(Aleatorio(2, 5)), o.GenerarOficina(Aleatorio(1, 3)), s.GenerarSalon(Aleatorio(3, 7))));
+        }
+        return x;
+    }
+    
     public int Aleatorio(int min, int max){
         return (int)((max - min + 1) * Math.random() + min);
     }
+
        
 }
